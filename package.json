@@ -4,7 +4,8 @@
   "description": "Testing typescript in node.js",
   "main": "dist/app.js",
   "scripts": {
-    "start": "tsc && node dist/app.js"
+    "serve": "ts-node-dev src/app.ts",
+    "build": "tsc && node dist/app.js"
   },
   "dependencies": {
     "express": "^4.17.1"
