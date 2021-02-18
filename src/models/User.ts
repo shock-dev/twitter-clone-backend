@@ -6,7 +6,7 @@ const userSchema = new Schema({
     username: { type: String, required: true },
     location: { type: String },
     password: { type: String, required: true },
-    confirmed: { type: Boolean, required: true },
+    confirmed: { type: Boolean, required: true, default: false },
     confirmed_hash: { type: String, required: true },
     about: { type: String },
     website: { type: String }
