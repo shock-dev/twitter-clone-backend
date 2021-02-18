@@ -8,6 +8,7 @@
     "build": "tsc && node dist/app.js"
   },
   "dependencies": {
+    "@types/nodemailer": "^6.4.0",
     "bcrypt": "^5.0.0",
     "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
