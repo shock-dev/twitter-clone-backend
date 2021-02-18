@@ -18,4 +18,11 @@ export default [
         .isString()
         .isLength({ min: 2 })
         .withMessage("Допустимое кол-во слов password от 6")
+        .custom((value, { req }) => {
+            if (value !== req.body.password_confirm) {
+                throw new Error("Пароли не совпадают");
+            } else {
+                return value;
+            }
+        })
 ]
