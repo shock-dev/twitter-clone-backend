@@ -1,6 +1,7 @@
 import User from "../models/User";
 import { validationResult  } from "express-validator";
 import generateMD5 from "../utils/generateHash";
+import sendEmail from "../utils/sendEmail";
 import express from "express";
 
 class UserController {
@@ -23,7 +24,7 @@ class UserController {
             // Prepare data to register
             const { email, username, fullname, password } = req.body;
             const stringForHash: string = process.env.SECRET_KEY || Math.random().toString();
-            const formData: object = {
+            const formData = {
                 email,
                 username,
                 fullname,
@@ -33,6 +34,15 @@ class UserController {
             // Create user
             const user: any = new User(formData);
             await user.save();
+
+            // Send mail
+            const options = {
+                from: "admin@mail.ru",
+                to: formData.email,
+                subject: "Подтверждение почты",
+                html: `Для того, чтобы подтвердить почту, перейдите <a href="http://localhost:${process.env.PORT}/users/verify?hash=${formData.confirmed_hash}">по этой ссылке</a>`,
+            };
+            await sendEmail(options);
             res.json(user);
         } catch (e) {
             res.status(400).json(e);
