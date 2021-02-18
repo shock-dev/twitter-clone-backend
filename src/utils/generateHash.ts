@@ -1,6 +1,5 @@
-import bcrypt from "bcrypt";
+import crypto from "crypto";
 
 export default (value: string): string => {
-    const salt = bcrypt.genSaltSync(10);
-    return  bcrypt.hashSync(value, salt);
+    return crypto.createHash("md5").update(value).digest("hex");
 }
