@@ -28,7 +28,7 @@ class UserController {
                 email,
                 username,
                 fullname,
-                password,
+                password: generateMD5(password + process.env.SECRET_KEY),
                 confirmed_hash: generateMD5(stringForHash)
             }
             // Create user
