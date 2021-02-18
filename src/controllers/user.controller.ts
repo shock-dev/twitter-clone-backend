@@ -48,6 +48,25 @@ class UserController {
             res.status(400).json(e);
         }
     }
+    async verify(req: express.Request, res: express.Response): Promise<void> {
+        try {
+            const { hash } = req.query;
+            if (!hash) {
+                res.status(400).send();
+                return;
+            }
+            const user = await User.findOne({ confirmed_hash: hash });
+            if (!user) {
+                res.status(400).send();
+                return;
+            }
+
+            await User.updateOne({ _id: user._id }, { confirmed: true });
+            res.json({ message: "Пользователь успешно подтвержден" });
+        } catch (e) {
+            res.status(400).json(e);
+        }
+    }
 }
 
 export default new UserController();
