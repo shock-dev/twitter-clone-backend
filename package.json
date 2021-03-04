@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@types/nodemailer": "^6.4.0",
+    "@types/passport": "^1.0.6",
+    "@types/passport-local": "^1.0.33",
     "bcrypt": "^5.0.0",
     "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
