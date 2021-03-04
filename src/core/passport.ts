@@ -6,7 +6,7 @@ import generateHash from '../utils/generateHash';
 passport.use(new LocalStrategy.Strategy(
     async (username, password, done): Promise<void> => {
         try {
-            const user = await User.findOne({ username }).select('+password');
+            const user = await User.findOne({ $or: [{ email: username }, { username }] }).select('+password');
 
             if (!user) {
                 return done(null, false, { message: 'Incorrect username or email.' });
