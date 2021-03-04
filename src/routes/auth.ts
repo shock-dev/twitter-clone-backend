@@ -19,8 +19,7 @@ router.post(
 router.post(
     "/signin",
     passport.authenticate('local'),
-    (req, res) => {
-        res.json(req.user);
-    });
+    controller.login
+);
 
 export default router;

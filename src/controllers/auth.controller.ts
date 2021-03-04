@@ -40,6 +40,9 @@ class AuthController {
             res.status(400).json(e);
         }
     }
+    async login(req: express.Request, res: express.Response): Promise<void> {
+        res.json(req.user);
+    }
     async verify(req: express.Request, res: express.Response): Promise<void> {
         try {
             const { hash } = req.query;
