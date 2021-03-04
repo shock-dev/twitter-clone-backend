@@ -3,13 +3,16 @@ dotenv.config();
 
 import express from "express";
 import userRoutes from "./routes/users";
+import authRoutes from "./routes/auth";
 import connectDb from "./core/db";
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+
 app.use("/users", userRoutes);
+app.use("/auth", authRoutes);
 
 const start = async (): Promise<void> => {
     try {
