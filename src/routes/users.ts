@@ -1,12 +1,16 @@
 import { Router } from "express";
-import authValidator from "../validation/auth.validation";
 import controller from "../controllers/user.controller";
 
 const router = Router();
 
-router.get("/", controller.getAll);
-router.post("/", authValidator, controller.register);
-router.get("/:id", controller.show);
-router.get("/verify", controller.verify);
+router.get(
+    "/",
+    controller.getAll
+);
+
+router.get(
+    "/:id",
+    controller.show
+);
 
 export default router;
