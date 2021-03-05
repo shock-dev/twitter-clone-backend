@@ -4,6 +4,7 @@ dotenv.config();
 import express from "express";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
+import tweetRoutes from "./routes/tweet";
 import connectDb from "./core/db";
 import passport from 'passport';
 
@@ -17,6 +18,7 @@ app.use(
 
 app.use("/users", userRoutes);
 app.use("/auth", authRoutes);
+app.use("/tweets", tweetRoutes);
 
 const start = async (): Promise<void> => {
     try {
