@@ -3,6 +3,8 @@ import LocalStrategy from 'passport-local';
 import User from '../models/User';
 import generateHash from '../utils/generateHash';
 
+import JWTstrategy, { ExtractJwt } from 'passport-jwt';
+
 passport.use(new LocalStrategy.Strategy(
     async (username, password, done): Promise<void> => {
         try {
@@ -23,6 +25,22 @@ passport.use(new LocalStrategy.Strategy(
         }
     }
 ));
+
+passport.use(
+    new JWTstrategy.Strategy(
+        {
+            secretOrKey: process.env.SECRET_KEY,
+            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
+        },
+        async (payload, done) => {
+            try {
+                return done(null, payload.data);
+            } catch (error) {
+                done(error);
+            }
+        }
+    )
+);
 
 passport.serializeUser((user, done) => {
     // @ts-ignore
