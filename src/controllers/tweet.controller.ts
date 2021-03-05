@@ -48,10 +48,11 @@ class TweetController {
             if (user) {
                 const { id } = req.params;
                 const tweet: any = await Tweet.findById(id);
+
                 if (!tweet) {
                     return res.status(404).send();
                 }
-                if (tweet.user !== user._id) {
+                if (String(tweet.user) !== String(user._id)) {
                     return res.status(400).send();
                 }
                 await tweet.remove();
