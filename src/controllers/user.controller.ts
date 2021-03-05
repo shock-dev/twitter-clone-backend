@@ -19,6 +19,10 @@ class UserController {
             res.status(404).json({ message: "Пользователь не найден!" });
         }
     }
+    test(req: express.Request, res: express.Response): void {
+        // @ts-ignore
+        res.json(req.user);
+    }
 }
 
 export default new UserController();

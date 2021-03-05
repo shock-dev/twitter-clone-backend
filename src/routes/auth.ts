@@ -19,7 +19,7 @@ router.post(
 router.post(
     "/signin",
     passport.authenticate('local'),
-    controller.login
+    controller.afterLogin
 );
 
 export default router;
