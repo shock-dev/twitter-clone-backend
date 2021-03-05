@@ -1,5 +1,6 @@
 import User from '../models/User';
 import express from 'express';
+import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
 import generateMD5 from '../utils/generateHash';
 import sendEmail from '../utils/sendEmail';
@@ -32,7 +33,7 @@ class AuthController {
                 from: "admin@mail.ru",
                 to: formData.email,
                 subject: "Подтверждение почты",
-                html: `Для того, чтобы подтвердить почту, перейдите <a href="http://localhost:${process.env.PORT}/users/auth/verify?hash=${formData.confirmed_hash}">по этой ссылке</a>`,
+                html: `Для того, чтобы подтвердить почту, перейдите <a href="http://localhost:${process.env.PORT}/auth/verify?hash=${formData.confirmed_hash}">по этой ссылке</a>`,
             };
             await sendEmail(options);
             res.json(user);
@@ -58,6 +59,21 @@ class AuthController {
 
             await User.updateOne({ _id: user._id }, { confirmed: true });
             res.json({ message: "Пользователь успешно подтвержден" });
+        } catch (e) {
+            res.status(400).json(e);
+        }
+    }
+    async afterLogin(req: express.Request, res: express.Response): Promise<void> {
+        try {
+            const user = req.user ? (req.user as any).toJSON() : undefined;
+
+            res.json({
+                status: 'success',
+                data: {
+                    ...user,
+                    token: jwt.sign({ data: user }, process.env.SECRET_KEY, { expiresIn: '30d' })
+                }
+            });
         } catch (e) {
             res.status(400).json(e);
         }
