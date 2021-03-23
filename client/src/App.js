@@ -14,10 +14,13 @@ import { fetchUserInfo } from './store/actions/user';
 
 const App = () => {
     const dispatch = useDispatch();
-    const {info} = useSelector(({user}) => user);
+    const { info } = useSelector(({ user }) => user);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        dispatch(fetchUserInfo());
+        if (token) {
+            dispatch(fetchUserInfo())
+        }
     }, []);
 
     return (

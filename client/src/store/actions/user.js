@@ -1,4 +1,4 @@
-import { SET_USER } from '../cases/user';
+import { CLEAR_USER, SET_USER } from '../cases/user';
 import axios from '../../core/axios';
 
 export const fetchUserInfo = () => async (dispatch) => {
@@ -8,7 +8,11 @@ export const fetchUserInfo = () => async (dispatch) => {
     } catch (e) {
         console.log(e);
     }
-}
+};
+
+export const logout = () => ({
+    type: CLEAR_USER
+});
 
 export const setUser = (data) => ({
     type: SET_USER,

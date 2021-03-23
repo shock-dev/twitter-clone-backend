@@ -1,4 +1,4 @@
-import { SET_USER } from '../cases/user';
+import { CLEAR_USER, SET_USER } from '../cases/user';
 
 const initialState = {
     info: null
@@ -10,6 +10,11 @@ const user = (state = initialState, action) => {
             return {
                 ...state,
                 info: action.payload
+            };
+        case CLEAR_USER:
+            return {
+                ...state,
+                info: null
             };
         default:
             return state;
