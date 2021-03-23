@@ -67,6 +67,7 @@ class AuthController {
         res.json({
             status: 'success',
             data: {
+                user: req.user,
                 token: jwt.sign({ data: req.user }, process.env.SECRET_KEY, { expiresIn: '30d' })
             }
         });
