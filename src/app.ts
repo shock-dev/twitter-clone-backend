@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import express from "express";
+import cors from "cors";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
 import tweetRoutes from "./routes/tweet";
@@ -13,6 +14,7 @@ const port = process.env.PORT || 3000;
 
 app.use(
     express.json(),
+    cors(),
     passport.initialize()
 );
 
