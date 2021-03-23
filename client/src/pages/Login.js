@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import axios from '../core/axios';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../store/actions/user';
+import { useHistory } from 'react-router-dom';
 
 const formSchema = {
     username: '',
@@ -7,13 +10,18 @@ const formSchema = {
 };
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
     const [formData, setFormData] = useState(formSchema);
 
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
             const { data } = await axios.post('http://localhost:5000/auth/signin', formData);
-            localStorage.setItem('token', data.data.token);
+            const { user, token } = data.data;
+            localStorage.setItem('token', token);
+            dispatch(setUser(user));
+            history.push('/');
         } catch (e) {
             console.log(e.response);
         }
