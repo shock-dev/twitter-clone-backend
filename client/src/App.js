@@ -14,20 +14,22 @@ const App = () => {
     return (
         <Router>
           <Header />
-          <Switch>
-              <Route path="/" exact>
-                  <Home />
-              </Route>
-              <Route path="/login" exact>
-                  <Login />
-              </Route>
-              <Route path="/register" exact>
-                  <Register />
-              </Route>
-              <Route path="*">
-                  <NoMatch />
-              </Route>
-          </Switch>
+          <div className="page container">
+              <Switch>
+                  <Route path="/" exact>
+                      <Home />
+                  </Route>
+                  <Route path="/login" exact>
+                      <Login />
+                  </Route>
+                  <Route path="/register" exact>
+                      <Register />
+                  </Route>
+                  <Route path="*">
+                      <NoMatch />
+                  </Route>
+              </Switch>
+          </div>
         </Router>
     );
 };
