@@ -38,11 +38,11 @@ class AuthController {
             await sendEmail(options);
             res.json(user);
         } catch (e) {
-            res.status(400).json(e);
+            res.status(400).json({
+                status: 'error',
+                message: 'Something went wrong'
+            });
         }
-    }
-    async login(req: express.Request, res: express.Response): Promise<void> {
-        res.json(req.user);
     }
     async verify(req: express.Request, res: express.Response): Promise<void> {
         try {
@@ -63,20 +63,13 @@ class AuthController {
             res.status(400).json(e);
         }
     }
-    async afterLogin(req: express.Request, res: express.Response): Promise<void> {
-        try {
-            const user = req.user ? (req.user as any).toJSON() : undefined;
-
-            res.json({
-                status: 'success',
-                data: {
-                    ...user,
-                    token: jwt.sign({ data: user }, process.env.SECRET_KEY, { expiresIn: '30d' })
-                }
-            });
-        } catch (e) {
-            res.status(400).json(e);
-        }
+    afterLogin(req: express.Request, res: express.Response): void {
+        res.json({
+            status: 'success',
+            data: {
+                token: jwt.sign({ data: req.user }, process.env.SECRET_KEY, { expiresIn: '30d' })
+            }
+        });
     }
 }
 
