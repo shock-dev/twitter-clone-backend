@@ -1,8 +1,15 @@
-import { model, Schema } from "mongoose";
+import { model, Schema } from 'mongoose';
 
 const tweetSchema = new Schema({
-    text: { type: String, required: true },
-    user: { type: Schema.Types.ObjectId, ref: 'users', required: true }
-})
+  text: {
+    type: String,
+    required: true
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'users',
+    required: true
+  }
+});
 
-export default model("tweets", tweetSchema);
+export default model('tweets', tweetSchema);
