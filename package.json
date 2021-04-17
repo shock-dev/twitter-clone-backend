@@ -5,9 +5,7 @@
   "main": "dist/app.js",
   "scripts": {
     "serve": "ts-node-dev src/app.ts",
-    "build": "tsc && node dist/app.js",
-    "client": "yarn --cwd client start",
-    "dev": "concurrently \"yarn serve\" \"yarn client\""
+    "build": "tsc && node dist/app.js"
   },
   "dependencies": {
     "@types/cors": "^2.8.10",
