@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import consola from 'consola';
 
-const connectDb = async (): Promise<void> => {
+const connect = async (): Promise<void> => {
   try {
     const options = {
       useNewUrlParser: true,
@@ -9,9 +9,11 @@ const connectDb = async (): Promise<void> => {
       useCreateIndex: true
     };
     await mongoose.connect(process.env.MONGO_URL, options);
+    consola.success('Connecting to mongo successfully');
   } catch (e) {
     consola.error(e);
+    process.exit();
   }
 };
 
-export default connectDb;
+export default connect;

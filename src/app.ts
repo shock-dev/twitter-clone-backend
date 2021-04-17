@@ -9,7 +9,7 @@ import consola from 'consola';
 import userRoutes from './routes/users';
 import authRoutes from './routes/auth';
 import tweetRoutes from './routes/tweet';
-import connectDb from './core/db';
+import connect from './core/db';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,15 +24,9 @@ app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/tweets', tweetRoutes);
 
-const start = async (): Promise<void> => {
-  try {
-    await connectDb();
+connect()
+  .then(() => {
     app.listen(port, (): void => {
       consola.success(`Server has been started at ${port} port`);
     });
-  } catch (e) {
-    consola.error(e);
-  }
-};
-
-start();
+  });
