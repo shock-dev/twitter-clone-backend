@@ -5,8 +5,9 @@ import passport from '../core/passport';
 const router = Router();
 
 router.get('/', controller.getAll);
-router.post('/', passport.authenticate('jwt', { session: false }), controller.create);
 router.get('/:id', controller.show);
-router.delete('/:id', passport.authenticate('jwt', { session: false }), controller.delete);
+router.post('/', passport.authenticate('jwt'), controller.create);
+router.patch('/:id', passport.authenticate('jwt'), controller.update);
+router.delete('/:id', passport.authenticate('jwt'), controller.delete);
 
 export default router;
