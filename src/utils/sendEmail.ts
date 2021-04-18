@@ -1,4 +1,5 @@
 import { SentMessageInfo } from 'nodemailer';
+import consola from 'consola';
 import mailer from '../core/mailer';
 
 interface SendEmailProps {
@@ -8,24 +9,22 @@ interface SendEmailProps {
   html: string
 }
 
-const defaultCallback = (error: Error | null, info: SentMessageInfo): void => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log(info);
-  }
-};
-
-export default async ({
-  from,
-  to,
-  subject,
-  html
-}: SendEmailProps, callback = defaultCallback): Promise<void> => {
+const sendEmail = async ({
+  from, to, subject, html
+}: SendEmailProps, callback) => {
   await mailer.sendMail({
     from,
     to,
     subject,
     html
-  }, callback);
+  }, callback
+    || ((err: Error | null, info: SentMessageInfo) => {
+      if (err) {
+        consola.error(err);
+      } else {
+        consola.info(info);
+      }
+    }));
 };
+
+export default sendEmail;
