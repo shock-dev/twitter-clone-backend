@@ -1,25 +1,12 @@
 import { Router } from 'express';
-import authValidator from '../validation/auth.validation';
-import controller from '../controllers/auth.controller';
-import passport from '../core/passport';
+import passport from 'passport';
+import authValidator from '../validation/register.validation';
+import controller from '../controllers/user.controller';
 
 const router = Router();
 
-router.get(
-  '/verify',
-  controller.verify
-);
-
-router.post(
-  '/signup',
-  authValidator,
-  controller.register
-);
-
-router.post(
-  '/signin',
-  passport.authenticate('local'),
-  controller.afterLogin
-);
+router.get('/verify', controller.verify);
+router.post('/register', authValidator, controller.register);
+router.post('/login', passport.authenticate('local'), controller.login);
 
 export default router;

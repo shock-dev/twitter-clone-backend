@@ -4,20 +4,8 @@ import passport from '../core/passport';
 
 const router = Router();
 
-router.get(
-  '/',
-  controller.getAll
-);
-
-router.get(
-  '/me',
-  passport.authenticate('jwt', { session: false }),
-  controller.test
-);
-
-router.get(
-  '/:id',
-  controller.show
-);
+router.get('/', controller.getAll);
+router.get('/me', passport.authenticate('jwt', { session: false }), controller.getUserInfo);
+router.get('/:id', controller.show);
 
 export default router;
