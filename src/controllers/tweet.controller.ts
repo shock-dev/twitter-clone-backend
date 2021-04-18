@@ -5,17 +5,15 @@ class TweetController {
   async getAll(req: express.Request, res: express.Response): Promise<void | express.Response> {
     try {
       const tweets = await Tweet.find();
-      if (!tweets) {
-        return res.status(404)
-          .json('Не удалось получить твиты');
-      }
       res.json({
         status: 'success',
-        tweets
+        data: tweets
       });
     } catch (e) {
-      res.status(500)
-        .json({ message: 'Что-то пошло не так' });
+      res.status(500).json({
+        status: 'error',
+        message: e
+      });
     }
   }
 
@@ -23,17 +21,15 @@ class TweetController {
     try {
       const { id } = req.params;
       const tweet = await Tweet.findById(id);
-      if (!tweet) {
-        return res.status(404)
-          .json({ message: 'Не удалось получить твит' });
-      }
       res.json({
         status: 'success',
-        tweet
+        data: tweet
       });
     } catch (e) {
-      res.status(500)
-        .json({ message: 'Что-то пошло не так' });
+      res.status(500).json({
+        status: 'error',
+        message: e
+      });
     }
   }
 
@@ -56,8 +52,10 @@ class TweetController {
         });
       }
     } catch (e) {
-      res.status(500)
-        .json({ status: 'error' });
+      res.status(500).json({
+        status: 'error',
+        message: e
+      });
     }
   }
 
@@ -74,15 +72,23 @@ class TweetController {
         }
         // @ts-ignore
         if (String(tweet.user) !== String(user.id)) {
-          return res.status(400)
-            .send();
+          return res.status(400).json({
+            status: 'error',
+            message: 'У вас нет прав на удаление'
+          });
         }
         await tweet.remove();
-        res.json({ status: 'success' });
+
+        res.json({
+          status: 'success',
+          data: tweet
+        });
       }
     } catch (e) {
-      res.status(500)
-        .json({ status: 'error' });
+      res.status(500).json({
+        status: 'error',
+        message: e
+      });
     }
   }
 }
