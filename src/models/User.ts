@@ -34,4 +34,4 @@ const userSchema = new Schema({
   website: { type: String }
 });
 
-export default model('users', userSchema);
+export default model('User', userSchema);

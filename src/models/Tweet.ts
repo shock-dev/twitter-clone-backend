@@ -7,9 +7,9 @@ const tweetSchema = new Schema({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'users',
+    ref: 'User',
     required: true
   }
 });
 
-export default model('tweets', tweetSchema);
+export default model('Tweet', tweetSchema);
