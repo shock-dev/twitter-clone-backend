@@ -59,6 +59,54 @@ class TweetController {
     }
   }
 
+  async update(req: express.Request, res: express.Response): Promise<void | express.Response> {
+    try {
+      const { user }: any = req;
+
+      if (!user) {
+        return res.status(400).json({
+          status: 'error'
+        });
+      }
+
+      const { id: tweetId } = req.params;
+
+      if (!tweetId) {
+        return res.status(400).json({
+          status: 'error'
+        });
+      }
+
+      const tweet: any = await Tweet.findById(tweetId);
+
+      if (!tweet) {
+        return res.status(404).json({
+          status: 'error'
+        });
+      }
+
+      if (String(tweet.user) !== String(user.id)) {
+        return res.status(403).send();
+      }
+
+      const { text } = req.body;
+
+      tweet.text = text;
+
+      await tweet.save();
+
+      res.json({
+        status: 'success',
+        data: tweet
+      });
+    } catch (e) {
+      res.status(500).json({
+        status: 'error',
+        message: e
+      });
+    }
+  }
+
   async delete(req: express.Request, res: express.Response): Promise<void | express.Response> {
     const { user } = req;
     try {
