@@ -7,16 +7,16 @@ import generateHash from '../utils/generateHash';
 passport.use(new LocalStrategy.Strategy(
   async (username, password, done): Promise<void> => {
     try {
-      const user = await User.findOne({ $or: [{ email: username }, { username }] })
+      const user: any = await User.findOne({ $or: [{ email: username }, { username }] })
         .select('+password');
 
       if (!user) {
-        return done(null, false, { message: 'Incorrect username or email.' });
+        return done(null, false);
       }
 
       // @ts-ignore
       if (user.password !== generateHash(password + process.env.SECRET_KEY)) {
-        return done(null, false, { message: 'Incorrect password.' });
+        return done(null, false);
       }
 
       return done(null, user);
@@ -26,21 +26,23 @@ passport.use(new LocalStrategy.Strategy(
   }
 ));
 
-passport.use(
-  new JWTstrategy.Strategy(
-    {
-      secretOrKey: process.env.SECRET_KEY,
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
-    },
-    async (payload, done) => {
-      try {
-        return done(null, payload.data);
-      } catch (error) {
-        done(error);
-      }
+passport.use(new JWTstrategy.Strategy({
+  secretOrKey: process.env.SECRET_KEY,
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
+}, async (payload, done) => {
+  try {
+    const { _id } = payload.data;
+    const user = await User.findById(_id);
+
+    if (!user) {
+      return done(null, false);
     }
-  )
-);
+
+    done(null, user);
+  } catch (e) {
+    return done(e, false);
+  }
+}));
 
 passport.serializeUser((user, done) => {
   // @ts-ignore
