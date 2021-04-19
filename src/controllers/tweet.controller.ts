@@ -4,7 +4,7 @@ import Tweet from '../models/Tweet';
 class TweetController {
   async getAll(req: express.Request, res: express.Response): Promise<void | express.Response> {
     try {
-      const tweets = await Tweet.find();
+      const tweets = await Tweet.find().populate('user');
       res.json({
         status: 'success',
         data: tweets
@@ -20,7 +20,7 @@ class TweetController {
   async show(req: express.Request, res: express.Response): Promise<void | express.Response> {
     try {
       const { id } = req.params;
-      const tweet = await Tweet.findById(id);
+      const tweet = await Tweet.findById(id).populate('user');
       res.json({
         status: 'success',
         data: tweet
