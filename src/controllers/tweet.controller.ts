@@ -4,7 +4,7 @@ import Tweet from '../models/Tweet';
 class TweetController {
   async getAll(req: express.Request, res: express.Response): Promise<void | express.Response> {
     try {
-      const tweets = await Tweet.find().populate('user');
+      const tweets = await Tweet.find().populate('user').sort({ createdAt: -1 });
       res.json({
         status: 'success',
         data: tweets
