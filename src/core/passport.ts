@@ -19,6 +19,8 @@ passport.use(new LocalStrategy.Strategy(
         return done(null, false);
       }
 
+      user.password = undefined;
+
       return done(null, user);
     } catch (e) {
       done(e);
