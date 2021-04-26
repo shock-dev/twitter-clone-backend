@@ -14,7 +14,7 @@ passport.use(new LocalStrategy.Strategy(
         return done(null, false);
       }
 
-      if (!user.confirmed && user.password !== generateHash(password + process.env.SECRET_KEY)) {
+      if (!user.confirmed || user.password !== generateHash(password + process.env.SECRET_KEY)) {
         return done(null, false);
       }
 
