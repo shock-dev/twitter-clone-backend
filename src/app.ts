@@ -9,6 +9,7 @@ import consola from 'consola';
 import userRoutes from './routes/users';
 import authRoutes from './routes/auth';
 import tweetRoutes from './routes/tweet';
+import uploadRoutes from './routes/upload';
 import connect from './core/db';
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/tweets', tweetRoutes);
+app.use('/upload', uploadRoutes);
 
 connect()
   .then(() => {
