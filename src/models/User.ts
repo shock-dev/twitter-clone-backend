@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose';
+import { IUser } from '../interfaces/user';
 
 const userSchema = new Schema({
   email: {
@@ -34,4 +35,4 @@ const userSchema = new Schema({
   website: { type: String }
 });
 
-export default model('User', userSchema);
+export default model<IUser>('User', userSchema);
