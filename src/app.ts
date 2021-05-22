@@ -1,16 +1,16 @@
-import dotenv from 'dotenv';
-
-dotenv.config();
-
 import express from 'express';
 import cors from 'cors';
 import passport from 'passport';
+import dotenv from 'dotenv';
 import consola from 'consola';
+
+dotenv.config();
+
+import connect from './core/db';
 import userRoutes from './routes/users';
 import authRoutes from './routes/auth';
 import tweetRoutes from './routes/tweet';
 import uploadRoutes from './routes/upload';
-import connect from './core/db';
 
 const app = express();
 const port = process.env.PORT || 5000;
