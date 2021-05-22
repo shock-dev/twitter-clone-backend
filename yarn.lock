@@ -114,7 +114,7 @@
 
 "@types/cors@^2.8.10":
   version "2.8.10"
-  resolved "https://registry.npmjs.org/@types/cors/-/cors-2.8.10.tgz"
+  resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.10.tgz#61cc8469849e5bcdd0c7044122265c39cec10cf4"
   integrity sha512-C7srjHiVG3Ey1nR6d511dtDkCEjxuN9W1HWAEjGq8kpcwmNM6JJkpC0xvabM7BXTG2wDq8Eu33iH9aQKa7IvLQ==
 
 "@types/express-serve-static-core@^4.17.18":
@@ -148,7 +148,7 @@
 
 "@types/jsonwebtoken@*", "@types/jsonwebtoken@^8.5.1":
   version "8.5.1"
-  resolved "https://registry.npmjs.org/@types/jsonwebtoken/-/jsonwebtoken-8.5.1.tgz"
+  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.5.1.tgz#56958cb2d80f6d74352bd2e501a018e2506a8a84"
   integrity sha512-rNAPdomlIUX0i0cg2+I+Q1wOUr531zHBQ+cV/28PJ39bSPKjahatZZ2LMuhiguETkCgLVzfruw/ZvNMNkKoSzw==
   dependencies:
     "@types/node" "*"
@@ -180,7 +180,7 @@
 
 "@types/nodemailer@^6.4.1":
   version "6.4.1"
-  resolved "https://registry.npmjs.org/@types/nodemailer/-/nodemailer-6.4.1.tgz"
+  resolved "https://registry.yarnpkg.com/@types/nodemailer/-/nodemailer-6.4.1.tgz#31f96f4410632f781d3613bd1f4293649e423f75"
   integrity sha512-8081UY/0XTTDpuGqCnDc8IY+Q3DSg604wB3dBH0CaZlj4nZWHWuxtZ3NRZ9c9WUrz1Vfm6wioAUnqL3bsh49uQ==
   dependencies:
     "@types/node" "*"
@@ -192,7 +192,7 @@
 
 "@types/passport-jwt@^3.0.5":
   version "3.0.5"
-  resolved "https://registry.npmjs.org/@types/passport-jwt/-/passport-jwt-3.0.5.tgz"
+  resolved "https://registry.yarnpkg.com/@types/passport-jwt/-/passport-jwt-3.0.5.tgz#bb0b412130f2739bc223180634295d8d6f767df4"
   integrity sha512-O6zZ4WKzQUwg3OU0MnOA2AIEQ6KfHyGdLoi4fqBLyb+kV7miGKNA2KNJRtiq45EsQ2QEDO8rKqORjXpWV7UJNg==
   dependencies:
     "@types/express" "*"
@@ -201,7 +201,7 @@
 
 "@types/passport-local@^1.0.33":
   version "1.0.33"
-  resolved "https://registry.npmjs.org/@types/passport-local/-/passport-local-1.0.33.tgz"
+  resolved "https://registry.yarnpkg.com/@types/passport-local/-/passport-local-1.0.33.tgz#d245b60c5b801cb3aeca1ffab557d5fe1534260d"
   integrity sha512-+rn6ZIxje0jZ2+DAiWFI8vGG7ZFKB0hXx2cUdMmudSWsigSq6ES7Emso46r4HJk0qCgrZVfI8sJiM7HIYf4SbA==
   dependencies:
     "@types/express" "*"
@@ -210,7 +210,7 @@
 
 "@types/passport-strategy@*":
   version "0.2.35"
-  resolved "https://registry.npmjs.org/@types/passport-strategy/-/passport-strategy-0.2.35.tgz"
+  resolved "https://registry.yarnpkg.com/@types/passport-strategy/-/passport-strategy-0.2.35.tgz#e52f5212279ea73f02d9b06af67efe9cefce2d0c"
   integrity sha512-o5D19Jy2XPFoX2rKApykY15et3Apgax00RRLf0RUotPDUsYrQa7x4howLYr9El2mlUApHmCMv5CZ1IXqKFQ2+g==
   dependencies:
     "@types/express" "*"
@@ -218,7 +218,7 @@
 
 "@types/passport@*", "@types/passport@^1.0.6":
   version "1.0.6"
-  resolved "https://registry.npmjs.org/@types/passport/-/passport-1.0.6.tgz"
+  resolved "https://registry.yarnpkg.com/@types/passport/-/passport-1.0.6.tgz#72343e49d65efa98cb328163cff5f127981947d7"
   integrity sha512-9oKfrJXuAxvyxdrtMCxKkHgmd6DMO8NDOLvMJ1LvIWd6/xP+i81PAkpTaEca7VhJX9S009RciwZL/j6dsLsHrA==
   dependencies:
     "@types/express" "*"
