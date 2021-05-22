@@ -4,11 +4,12 @@ import { validationResult } from 'express-validator';
 import User from '../models/User';
 import generateMD5 from '../utils/generateHash';
 import sendEmail from '../utils/sendEmail';
+import { IUser } from '../interfaces/user';
 
 class UserController {
   async getAll(_, res: express.Response): Promise<void> {
     try {
-      const users = await User.find();
+      const users: IUser[] = await User.find();
 
       res.json({
         status: 'success',
@@ -37,22 +38,20 @@ class UserController {
 
       const randomStr = Math.random().toString();
 
-      const data = {
+      const user: IUser = await User.create({
         email: req.body.email,
         username: req.body.username,
         fullname: req.body.fullname,
         password: generateMD5(req.body.password + process.env.SECRET_KEY),
         confirmed_hash: generateMD5(process.env.SECRET_KEY + randomStr || randomStr)
-      };
-
-      const user = await User.create(data);
+      });
 
       await sendEmail(
         {
           from: 'admin@twitter.com',
-          to: data.email,
+          to: user.email,
           subject: 'Подтверждение почты Twitter Clone',
-          html: `Для того, чтобы подтвердить почту, перейдите <a href="http://localhost:${process.env.PORT || 5000}/auth/verify?hash=${data.confirmed_hash}">по этой ссылке</a>`
+          html: `Для того, чтобы подтвердить почту, перейдите <a href="http://localhost:${process.env.PORT || 5000}/auth/verify?hash=${user.confirmed_hash}">по этой ссылке</a>`
         },
         (err: Error | null) => {
           if (err) {
@@ -86,7 +85,8 @@ class UserController {
         return res.status(400).send();
       }
 
-      const user: any = await User.findOne({ confirmed_hash: hash }).exec();
+      // @ts-ignore
+      const user: IUser = await User.findOne({ confirmed_hash: hash });
 
       if (!user) {
         return res.status(404).json({
@@ -112,7 +112,7 @@ class UserController {
   async show(req: express.Request, res: express.Response): Promise<void> {
     try {
       const { id } = req.params;
-      const user = await User.findById(id);
+      const user: IUser = await User.findById(id);
       res.json({
         status: 'success',
         data: user
@@ -150,11 +150,9 @@ class UserController {
 
   getUserInfo(req: express.Request, res: express.Response) {
     try {
-      const { user } = req;
-
       res.json({
         status: 'success',
-        data: user
+        data: req.user
       });
     } catch (e) {
       res.status(500).json({
